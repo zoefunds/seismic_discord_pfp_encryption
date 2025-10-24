@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Profile Pic Encryptor — SEISMIC </title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1 class="title">Profile Pic Encryptor for Seismic Community</h1>
+      <p class="subtitle">Encrypt your image locally and decrypt it later.</p>
+    </header>
+
+    <section class="card">
+      <div class="tabs">
+        <button id="tab-encrypt" class="tab active">Encrypt</button>
+        <button id="tab-decrypt" class="tab">Decrypt</button>
+      </div>
+
+      <div id="encrypt-panel" class="panel">
+        <label class="dropzone" id="dropzone">
+          <input id="image-input" type="file" accept="image/*" />
+          <div class="drop-content">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84V19h4.66V9h3.84L12 2z"/></svg>
+            <p class="drop-text">Click or drop a profile picture here</p>
+            <small class="hint">PNG, JPG, GIF — up to your browser limits</small>
+            <img id="preview" alt="preview" class="preview hidden" />
+          </div>
+        </label>
+
+        <div class="controls">
+          <input id="password-encrypt" type="password" placeholder="Enter password to encrypt" />
+          <div class="row">
+            <button id="encrypt-btn" class="btn primary" disabled>Encrypt & Download</button>
+            <button id="clear-encrypt" class="btn ghost">Clear</button>
+          </div>
+          <div id="encrypt-status" class="status"></div>
+
+          <!-- New: readable JSON viewer and actions -->
+          <div id="json-actions" class="json-actions hidden">
+            <div class="json-row">
+              <button id="open-json" class="btn">Open JSON</button>
+              <button id="copy-json" class="btn">Copy JSON</button>
+              <a id="download-json" class="btn primary" download>Download .enc.json</a>
+            </div>
+            <textarea id="json-viewer" class="json-viewer" readonly aria-label="Encrypted JSON output"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div id="decrypt-panel" class="panel hidden">
+        <label class="filepicker">
+          <input id="encrypted-input" type="file" accept=".enc,.json,application/json" />
+          <div class="filepicker-content">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2L2 7l10 5 10-5-10-5zm0 6.5L4.2 7 12 3.5 19.8 7 12 8.5zM2 17l10 5 10-5v-2l-10 5-10-5v2z"/></svg>
+            <p class="drop-text">Upload the .enc file here</p>
+            <small class="hint">Produced by this page</small>
+          </div>
+        </label>
+
+        <div class="controls">
+          <input id="password-decrypt" type="password" placeholder="Enter passphrase to decrypt" />
+          <div class="row">
+            <button id="decrypt-btn" class="btn primary" disabled>Decrypt & Show</button>
+            <button id="clear-decrypt" class="btn ghost">Clear</button>
+          </div>
+          <div id="decrypt-status" class="status"></div>
+          <img id="decrypted-preview" alt="decrypted preview" class="preview decrypted hidden" />
+          <a id="download-decrypted" class="btn download hidden" download>Download Restored Image</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <small>Developed by @ZOEFUNDS</small>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
