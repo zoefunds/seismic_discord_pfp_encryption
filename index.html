@@ -7,20 +7,15 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Background video wrapper: replace sources/poster in assets/ or use remote URLs -->
-  <div class="bg-wrap" aria-hidden="true">
-    <video id="bg-video" class="bg-video" autoplay muted loop playsinline preload="auto" poster="assets/bg-poster.jpg">
-      <!-- Prefer webm then mp4. Replace these with your files or remote URLs -->
-      <source src="background.mp4" type="video/mp4">
-      <!-- Fallback text -->
-      Your browser does not support the background video.
-    </video>
-  </div>
-
   <main class="container">
     <header class="header">
-      <h1 class="title">Image Encryptor for Seismic Community</h1>
-      <p class="subtitle">Encrypt your image locally and decrypt it later.</p>
+      <div class="brand">
+        <img src="logo.jpg" alt="Seismic logo" class="logo" />
+        <div class="brand-text">
+          <h1 class="title">Image Encryptor for Seismic Community</h1>
+          <p class="subtitle">Encrypt your image locally and decrypt it later.</p>
+        </div>
+      </div>
     </header>
 
     <section class="card">
