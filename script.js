@@ -1,5 +1,6 @@
 // script.js - client-side encrypt/decrypt demo using Web Crypto API
 // Updated: encrypted output is pretty JSON and there's a viewer + open/copy/download UI
+// Added: background video reduced-motion handling
 
 // Helpers: base64 <-> arraybuffer
 const bufToBase64 = (buf) => {
@@ -80,6 +81,28 @@ async function decryptBlobToFile(encryptedBlob, password){
 
 // UI wiring
 document.addEventListener('DOMContentLoaded', () => {
+  // Background video accessibility: respect prefers-reduced-motion and try to play/pause accordingly
+  const bgVideo = document.getElementById('bg-video');
+  if (bgVideo) {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const updateMotion = () => {
+      if (mq.matches) {
+        try { bgVideo.pause(); } catch (e) {}
+        bgVideo.setAttribute('aria-hidden', 'true');
+      } else {
+        // Try to play video (muted videos usually autoplay)
+        if (typeof bgVideo.play === 'function') bgVideo.play().catch(() => {});
+        bgVideo.removeAttribute('aria-hidden');
+      }
+    };
+    if (mq.addEventListener) mq.addEventListener('change', updateMotion);
+    else mq.addListener(updateMotion);
+    updateMotion();
+
+    // hide if error loading
+    bgVideo.addEventListener('error', () => { bgVideo.style.display = 'none'; });
+  }
+
   // Tabs
   const tabEnc = document.getElementById('tab-encrypt');
   const tabDec = document.getElementById('tab-decrypt');
